@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'], // ✅ Use a proper preview banner
   },
   verification: {
-    google: 'YOUR_ACTUAL_GOOGLE_SITE_VERIFICATION_TOKEN',
+    google: 'TwGBC-YGauR8kmpE9OFznfWfx5XgGnP8ZmeQKXB_9Ig',
   },
   robots: {
     index: true,
@@ -64,6 +64,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <meta name="google-site-verification" content="TwGBC-YGauR8kmpE9OFznfWfx5XgGnP8ZmeQKXB_9Ig" />
         <script type="application/ld+json">
           {`
 {
