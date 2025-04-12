@@ -65,42 +65,44 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <meta name="google-site-verification" content="TwGBC-YGauR8kmpE9OFznfWfx5XgGnP8ZmeQKXB_9Ig" />
-        <script type="application/ld+json">
-          {`
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Pay Stub Calculator",
-  "url": "https://paystubcalculator.org",
-  "description": "Calculate your take-home pay with our free paycheck calculator. Account for federal & state taxes, deductions like FICA, Medicare, health insurance, and 401(k) contributions.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "PayStub Calculator",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://paystubcalculator.org/logo.svg"
-    }
-  },
-  "image": "https://paystubcalculator.org/og-image.jpg",
-  "keywords": [
-    "pay stub calculator",
-    "pay check calculator",
-    "paycheck tax calculator",
-    "free paycheck calculator",
-    "calculate my paycheck",
-    "paycheck estimator",
-    "payroll check calculator",
-    "hourly paycheck calculator",
-    "paystub generator with calculator",
-    "salary paycheck calculator",
-    "federal tax calculator paycheck",
-    "take home paycheck calculator",
-    "how to calculate taxes on paycheck"
-  ],
-  "inLanguage": "en"
-}
-`}
-        </script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Pay Stub Calculator",
+              "url": "https://paystubcalculator.org",
+              "description":
+                "Calculate your take-home pay with our free paycheck calculator. Account for federal & state taxes, deductions like FICA, Medicare, health insurance, and 401(k) contributions.",
+              "publisher": {
+                "@type": "Organization",
+                "name": "PayStub Calculator",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://paystubcalculator.org/logo.svg",
+                },
+              },
+              "image": "https://paystubcalculator.org/og-image.jpg",
+              "keywords": [
+                "pay stub calculator",
+                "pay check calculator",
+                "paycheck tax calculator",
+                "free paycheck calculator",
+                "calculate my paycheck",
+                "paycheck estimator",
+                "payroll check calculator",
+                "hourly paycheck calculator",
+                "paystub generator with calculator",
+                "salary paycheck calculator",
+                "federal tax calculator paycheck",
+                "take home paycheck calculator",
+                "how to calculate taxes on paycheck",
+              ],
+              "inLanguage": "en",
+            }),
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${montserrat.variable} ${sourceSans.variable} font-sans pt-16`}>
         {children}
