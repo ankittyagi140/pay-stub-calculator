@@ -55,7 +55,7 @@
 
   .btn-outline {
     @apply border border-[var(--secondary)] text-[var(--secondary)] hover:bg-[var(--secondary)] hover:text-white;
-  }
+}
 
   .btn-danger {
     @apply bg-[var(--danger)] hover:bg-[color:var(--danger)]/90 text-white;

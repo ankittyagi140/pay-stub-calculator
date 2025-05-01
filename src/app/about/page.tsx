@@ -3,6 +3,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ShareIcons from '@/components/ShareIcons';
+import AuthorProfile from '@/components/AuthorProfile';
 
 export default function About() {
   return (
@@ -62,6 +63,7 @@ export default function About() {
           </div>
         </div>
       </main>
+      <AuthorProfile />
       <Footer />
     </>
   );
