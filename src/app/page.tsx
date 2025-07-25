@@ -86,6 +86,28 @@ const formSteps: Step[] = [
   }
 ];
 
+// Add icon mapping for steps
+const STEP_ICONS = [
+  (
+    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+  ), // Employee
+  (
+    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18" /></svg>
+  ), // Employer
+  (
+    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+  ), // Pay Period
+  (
+    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V7a2 2 0 012-2h12a2 2 0 012 2v7c0 2.21-3.582 4-8 4z" /></svg>
+  ), // Earnings
+  (
+    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V7a2 2 0 012-2h12a2 2 0 012 2v7c0 2.21-3.582 4-8 4z" /></svg>
+  ), // Deductions
+  (
+    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 20h9" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
+  ), // Additional
+];
+
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isCalculated, setIsCalculated] = useState(false);
@@ -456,40 +478,41 @@ export default function Home() {
     }
   };
 
-  // Add progress indicator component
+  // Enhanced ProgressIndicator with icons and progress bar
   const ProgressIndicator = () => (
     <div className="mb-8">
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        {formSteps.map((step, index) => (
-          <div key={index} className="flex items-center">
-            <button
-              type="button"
-              onClick={() => index < currentStep && setCurrentStep(index)}
-              className={`flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                index === currentStep
-                  ? 'bg-blue-600 text-white'
-                  : index < currentStep
-                  ? 'bg-green-500 text-white cursor-pointer hover:bg-green-600'
-                  : 'bg-gray-200 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              <span className="mr-2">
-                {index < currentStep ? '✓' : (index + 1)}
-              </span>
-              <span className="hidden sm:inline">{step.title}</span>
-              <span className="sm:hidden">{step.title.split(' ')[0]}</span>
-            </button>
-            {index < formSteps.length - 1 && (
-              <div
-                className={`hidden sm:block h-[2px] w-8 mx-2 ${
-                  index < currentStep ? 'bg-green-500' : 'bg-gray-200'
-                }`}
-              />
-            )}
-          </div>
-        ))}
+      <div className="relative w-full max-w-2xl mx-auto mb-4">
+        <div className="absolute top-1/2 left-0 w-full h-2 bg-gray-200 rounded-full -translate-y-1/2 z-0" />
+        <div
+          className="absolute top-1/2 left-0 h-2 bg-blue-500 rounded-full z-10 transition-all duration-300"
+          style={{
+            width: `${((currentStep) / (formSteps.length - 1)) * 100}%`,
+            minWidth: '2rem',
+          }}
+        />
+        <div className="flex justify-between relative z-20">
+          {formSteps.map((step, index) => (
+            <div key={index} className="flex flex-col items-center w-1/6">
+              <button
+                type="button"
+                onClick={() => index < currentStep && setCurrentStep(index)}
+                className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-colors duration-200
+                  ${index === currentStep
+                    ? 'bg-blue-600 border-blue-600 text-white scale-110 shadow-lg'
+                    : index < currentStep
+                    ? 'bg-green-500 border-green-500 text-white hover:bg-green-600 cursor-pointer'
+                    : 'bg-gray-200 border-gray-300 text-gray-500 cursor-not-allowed'}
+                `}
+                aria-label={`Step ${index + 1}: ${step.title}`}
+              >
+                {STEP_ICONS[index]}
+              </button>
+              <span className={`mt-2 text-xs text-center font-medium ${index === currentStep ? 'text-blue-700' : 'text-gray-500'}`}>{step.title.split(' ')[0]}</span>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-2">
         <div className="flex items-center text-sm text-gray-600">
           <span className="font-medium">Step {currentStep + 1} of {formSteps.length}:</span>
           <span className="ml-2">{formSteps[currentStep].title}</span>
